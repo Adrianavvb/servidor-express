@@ -1,20 +1,32 @@
 const express = require("express");
 const router = express.Router();
-const fs = require('fs');
-const path = require('path');
 
 const tasks = require("./tasks");
 
+// Middleware para validar el cuerpo de las solicitudes POST y PUT
+function validateTask(req, res, next) {
+  const task = req.body;
+  if (!task || Object.keys(task).length === 0) {
+    return res
+      .status(400)
+      .json({ error: "El cuerpo de la solicitud está vacío." });
+  }
+  if (!task.title || !task.description) {
+    return res.status(400).json({
+      error:
+        "Información no válida o atributos faltantes para crear las tareas.",
+    });
+  }
+  next();
+}
+
 //ruta para la creacion de tareas
 
-
-router.post("/create", (req, res) => {
-  tasks.push({ ...req.body, id: tasks.length });
-    res.send("creando tarea");
+router.post("/create", validateTask, (req, res) => {
+  tasks.push({ ...req.body, id: tasks.length +1});
+  res.send("creando tarea");
   console.log(tasks);
 });
-
-
 
 
 //ruta para la eliminacion de tareas
@@ -32,10 +44,8 @@ router.delete("/delete/:id", (req, res) => {
 });
 
 //ruta para actualizar tareas
-router.put("/update/:id", (req, res) => {
+router.put("/update/:id", validateTask, (req, res) => {
   const id = parseInt(req.params.id);
-
-  //mensajes de respuesta segun el comando especificado
   const task = tasks.find((task) => task.id === id);
   if (task) {
     task.completed = true;
@@ -44,5 +54,4 @@ router.put("/update/:id", (req, res) => {
     res.status(404).json({ error: "No se encontró la tarea especificada." });
   }
 });
-
 module.exports = router;
