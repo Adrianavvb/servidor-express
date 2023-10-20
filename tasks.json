@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "title": "primera tarea",
+    "description": "Lavar",
+    "completed": true
+  },
+  {
+    "id": 2,
+    "title": "segunda tarea",
+    "description": "Limpiar baño",
+    "completed": true
+  },
+  {
+    "id": 3,
+    "title": "Tercera tarea",
+    "description": "Doblar ropa",
+    "completed": false
+  },
+  {
+    "id": 4,
+    "title": "Cuarta tarea",
+    "description": "Limpiar",
+    "completed": false
+  },
+  {
+    "id": 5,
+    "title": "Quinta tarea",
+    "description": "Limpiar cuarto",
+    "completed": false
+  },
+  {
+    "id": 6,
+    "title": "Sexta tarea",
+    "description": "Limpiar Baño",
+    "completed": false
+  },
+  {
+    "id": 7,
+    "title": "Sexta tarea",
+    "description": "cocinar",
+    "completed": false
+  }
+]
